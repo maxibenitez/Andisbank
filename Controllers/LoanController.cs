@@ -14,9 +14,18 @@ namespace Andisbank.Controllers
         }
 
         [HttpGet("loans/details/{loanId}")]
-        public IActionResult GetLoanDetails()
+        public IActionResult GetLoanDetails(int loanId)
         {
-            return Ok();
+            // Obtener el prestamo por ID
+            var loan = loans.FirstOrDefault(l => l.LoanId == loanId);
+
+            if (loan == null)
+            {
+                return NotFound("Préstamo no encontrado");
+            }
+
+            // Retornar préstamo
+            return Ok(loan);
         }
 
         [HttpPost("loans/apply")]
@@ -35,6 +44,7 @@ namespace Andisbank.Controllers
         {
             // Obtener el usuario por ID
             var user = users.FirstOrDefault(u => u.UserId == userId);
+
             if (user == null)
             {
                 return NotFound("Usuario no encontrado");
@@ -76,108 +86,108 @@ namespace Andisbank.Controllers
 
         // Datos mock de usuarios
         private static List<User> users = new List<User>
-    {
-        new User
         {
-            UserId = 12345,
-            FirstName = "John",
-            LastName = "Doe",
-            Email = "john.doe@example.com",
-            Phone = "+123456789",
-            Address = "123 Main St, Springfield, USA"
-        },
-        new User
-        {
-            UserId = 67890,
-            FirstName = "Jane",
-            LastName = "Smith",
-            Email = "jane.smith@example.com",
-            Phone = "+987654321",
-            Address = "456 Elm St, Springfield, USA"
-        },
-        new User
-        {
-            UserId = 11223,
-            FirstName = "Alice",
-            LastName = "Johnson",
-            Email = "alice.johnson@example.com",
-            Phone = "+564738291",
-            Address = "789 Oak St, Springfield, USA"
-        },
-        new User
-        {
-            UserId = 33445,
-            FirstName = "Bob",
-            LastName = "Williams",
-            Email = "bob.williams@example.com",
-            Phone = "+345672189",
-            Address = "101 Pine St, Springfield, USA"
-        }
-    };
+            new User
+            {
+                UserId = 12345,
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "john.doe@example.com",
+                Phone = "+123456789",
+                Address = "123 Main St, Springfield, USA"
+            },
+            new User
+            {
+                UserId = 67890,
+                FirstName = "Jane",
+                LastName = "Smith",
+                Email = "jane.smith@example.com",
+                Phone = "+987654321",
+                Address = "456 Elm St, Springfield, USA"
+            },
+            new User
+            {
+                UserId = 11223,
+                FirstName = "Alice",
+                LastName = "Johnson",
+                Email = "alice.johnson@example.com",
+                Phone = "+564738291",
+                Address = "789 Oak St, Springfield, USA"
+            },
+            new User
+            {
+                UserId = 33445,
+                FirstName = "Bob",
+                LastName = "Williams",
+                Email = "bob.williams@example.com",
+                Phone = "+345672189",
+                Address = "101 Pine St, Springfield, USA"
+            }
+        };
 
         // Datos mock de préstamos
         private static List<Loan> loans = new List<Loan>
-    {
-        new Loan
         {
-            LoanId = 1,
-            UserId = 12345,
-            LoanTypeId = 1,
-            Amount = 15000,
-            Currency = "USD",
-            TermMonths = 36,
-            InterestRate = 5.5,
-            MonthlyPayment = 452.12,
-            Balance = 13500,
-            Status = "active",
-            startDate = DateTime.Parse("2024-09-04T00:00:00Z"),
-            endDate = DateTime.Parse("2027-09-04T00:00:00Z")
-        },
-        new Loan
-        {
-            LoanId = 2,
-            UserId = 67890,
-            LoanTypeId = 2,
-            Amount = 200000,
-            Currency = "USD",
-            TermMonths = 240,
-            InterestRate = 3.5,
-            MonthlyPayment = 1164.12,
-            Balance = 198500,
-            Status = "active",
-            startDate = DateTime.Parse("2024-09-10T00:00:00Z"),
-            endDate = DateTime.Parse("2044-09-10T00:00:00Z")
-        },
-        new Loan
-        {
-            LoanId = 3,
-            UserId = 11223,
-            LoanTypeId = 3,
-            Amount = 25000,
-            Currency = "USD",
-            TermMonths = 60,
-            InterestRate = 4.2,
-            MonthlyPayment = 463.25,
-            Balance = 24800,
-            Status = "active",
-            startDate = DateTime.Parse("2024-10-01T00:00:00Z"),
-            endDate = DateTime.Parse("2029-10-01T00:00:00Z")
-        },
-        new Loan
-        {
-            LoanId = 4,
-            UserId = 33445,
-            LoanTypeId = 4,
-            Amount = 50000,
-            Currency = "USD",
-            TermMonths = 120,
-            InterestRate = 6.0,
-            MonthlyPayment = 555.56,
-            Balance = 49500,
-            Status = "active",
-            startDate = DateTime.Parse("2024-08-01T00:00:00Z"),
-            endDate = DateTime.Parse("2034-08-01T00:00:00Z")
-        }
-    };
+            new Loan
+            {
+                LoanId = 1,
+                UserId = 12345,
+                LoanTypeId = 1,
+                Amount = 15000,
+                Currency = "USD",
+                TermMonths = 36,
+                InterestRate = 5.5,
+                MonthlyPayment = 452.12,
+                Balance = 13500,
+                Status = "active",
+                startDate = DateTime.Parse("2024-09-04T00:00:00Z"),
+                endDate = DateTime.Parse("2027-09-04T00:00:00Z")
+            },
+            new Loan
+            {
+                LoanId = 2,
+                UserId = 67890,
+                LoanTypeId = 2,
+                Amount = 200000,
+                Currency = "USD",
+                TermMonths = 240,
+                InterestRate = 3.5,
+                MonthlyPayment = 1164.12,
+                Balance = 198500,
+                Status = "active",
+                startDate = DateTime.Parse("2024-09-10T00:00:00Z"),
+                endDate = DateTime.Parse("2044-09-10T00:00:00Z")
+            },
+            new Loan
+            {
+                LoanId = 3,
+                UserId = 11223,
+                LoanTypeId = 3,
+                Amount = 25000,
+                Currency = "USD",
+                TermMonths = 60,
+                InterestRate = 4.2,
+                MonthlyPayment = 463.25,
+                Balance = 24800,
+                Status = "active",
+                startDate = DateTime.Parse("2024-10-01T00:00:00Z"),
+                endDate = DateTime.Parse("2029-10-01T00:00:00Z")
+            },
+            new Loan
+            {
+                LoanId = 4,
+                UserId = 33445,
+                LoanTypeId = 4,
+                Amount = 50000,
+                Currency = "USD",
+                TermMonths = 120,
+                InterestRate = 6.0,
+                MonthlyPayment = 555.56,
+                Balance = 49500,
+                Status = "active",
+                startDate = DateTime.Parse("2024-08-01T00:00:00Z"),
+                endDate = DateTime.Parse("2034-08-01T00:00:00Z")
+            }
+        };
     }
 }
