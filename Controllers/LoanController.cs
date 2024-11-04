@@ -1,5 +1,6 @@
 using Andisbank.Models;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace Andisbank.Controllers
 {
@@ -10,21 +11,26 @@ namespace Andisbank.Controllers
         [HttpGet("loans")]
         public IActionResult GetLoans()
         {
+            Log.Information("Request to get all loans");
             return Ok(loans);
         }
 
         [HttpGet("loans/details/{loanId}")]
         public IActionResult GetLoanDetails(int loanId)
         {
-            // Obtener el prestamo por ID
+            Log.Information("Request to get loan details for LoanId: {LoanId}", loanId);
+
+            // Obtener el prÃ©stamo por ID
             var loan = loans.FirstOrDefault(l => l.LoanId == loanId);
 
             if (loan == null)
             {
-                return NotFound("Préstamo no encontrado");
+                Log.Warning("Loan with LoanId: {LoanId} not found", loanId);
+                return NotFound("PrÃ©stamo no encontrado");
             }
 
-            // Retornar préstamo
+            // Retornar prÃ©stamo
+            Log.Debug("Loan details retrieved for LoanId: {LoanId}", loanId);
             return Ok(loan);
         }
 
@@ -33,32 +39,39 @@ namespace Andisbank.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Log.Warning("Invalid loan application data received");
                 return BadRequest("Faltan datos");
             }
 
-            return Ok("Aplicación a préstamo exitosa");
+            Log.Information("Loan application submitted successfully for UserId: {UserId}", application.UserId);
+            return Ok("AplicaciÃ³n a prÃ©stamo exitosa");
         }
 
         [HttpGet("loans/user/{userId}")]
         public IActionResult GetUserLoans(int userId)
         {
+            Log.Information("Request to get loans for UserId: {UserId}", userId);
+
             // Obtener el usuario por ID
             var user = users.FirstOrDefault(u => u.UserId == userId);
 
             if (user == null)
             {
+                Log.Warning("User with UserId: {UserId} not found", userId);
                 return NotFound("Usuario no encontrado");
             }
 
-            // Filtrar los préstamos por UserId
+            // Filtrar los prÃ©stamos por UserId
             var userLoans = loans.Where(l => l.UserId == userId).ToList();
 
             if (userLoans.Count == 0)
             {
-                return NotFound("El usuario no tiene préstamos");
+                Log.Information("UserId: {UserId} has no loans", userId);
+                return NotFound("El usuario no tiene prÃ©stamos");
             }
 
-            // Retornar préstamos asociados al usuario
+            // Retornar prÃ©stamos asociados al usuario
+            Log.Debug("Loans retrieved for UserId: {UserId}", userId);
             return Ok(userLoans);
         }
 
@@ -67,10 +80,12 @@ namespace Andisbank.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Log.Warning("Invalid payment data received");
                 return BadRequest("Faltan datos");
             }
 
-            return Ok("Pago realizado con éxito");
+            Log.Information("Payment successful for LoanId: {LoanId}", payment.LoanId);
+            return Ok("Pago realizado con Ã©xito");
         }
 
         [HttpPost("loans/simulate")]
@@ -78,10 +93,12 @@ namespace Andisbank.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Log.Warning("Invalid simulation data received");
                 return BadRequest("Faltan datos");
             }
 
-            return Ok("Simulación exitosa");
+            Log.Information("Loan simulation completed successfully for amount: {Amount}", simulation.Amount);
+            return Ok("SimulaciÃ³n exitosa");
         }
 
         // Datos mock de usuarios
@@ -125,7 +142,7 @@ namespace Andisbank.Controllers
             }
         };
 
-        // Datos mock de préstamos
+        // Datos mock de prÃ©stamos
         private static List<Loan> loans = new List<Loan>
         {
             new Loan

@@ -1,0 +1,26 @@
+2024-11-04 20:33:18.600 -03:00 [INF] Now listening on: http://localhost:5000
+2024-11-04 20:33:18.651 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-04 20:33:18.653 -03:00 [INF] Hosting environment: Production
+2024-11-04 20:33:18.654 -03:00 [INF] Content root path: C:\Users\juanm\ANDIS\Andisbank
+2024-11-04 20:33:24.573 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/index.html - null null
+2024-11-04 20:33:24.619 -03:00 [WRN] Failed to determine the https port for redirect.
+2024-11-04 20:33:24.725 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/index.html - 200 null text/html;charset=utf-8 156.5784ms
+2024-11-04 20:33:25.691 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - null null
+2024-11-04 20:33:25.852 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 161.1124ms
+2024-11-04 20:33:29.543 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/v1/loans - null null
+2024-11-04 20:33:29.556 -03:00 [INF] Executing endpoint 'Andisbank.Controllers.LoanController.GetLoans (Andisbank)'
+2024-11-04 20:33:29.583 -03:00 [INF] Route matched with {action = "GetLoans", controller = "Loan"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLoans() on controller Andisbank.Controllers.LoanController (Andisbank).
+2024-11-04 20:33:29.589 -03:00 [INF] Request to get all loans
+2024-11-04 20:33:29.603 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Andisbank.Models.Loan, Andisbank, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-04 20:33:29.632 -03:00 [INF] Executed action Andisbank.Controllers.LoanController.GetLoans (Andisbank) in 44.3317ms
+2024-11-04 20:33:29.634 -03:00 [INF] Executed endpoint 'Andisbank.Controllers.LoanController.GetLoans (Andisbank)'
+2024-11-04 20:33:29.636 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/v1/loans - 200 null application/json; charset=utf-8 92.2407ms
+2024-11-04 20:33:30.983 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/v1/loans - null null
+2024-11-04 20:33:30.986 -03:00 [INF] Executing endpoint 'Andisbank.Controllers.LoanController.GetLoans (Andisbank)'
+2024-11-04 20:33:30.988 -03:00 [INF] Route matched with {action = "GetLoans", controller = "Loan"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLoans() on controller Andisbank.Controllers.LoanController (Andisbank).
+2024-11-04 20:33:30.990 -03:00 [INF] Request to get all loans
+2024-11-04 20:33:30.991 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Andisbank.Models.Loan, Andisbank, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-04 20:33:30.993 -03:00 [INF] Executed action Andisbank.Controllers.LoanController.GetLoans (Andisbank) in 3.302ms
+2024-11-04 20:33:30.994 -03:00 [INF] Executed endpoint 'Andisbank.Controllers.LoanController.GetLoans (Andisbank)'
+2024-11-04 20:33:30.996 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/v1/loans - 200 null application/json; charset=utf-8 12.7566ms
+2024-11-04 20:33:46.885 -03:00 [INF] Application is shutting down...
